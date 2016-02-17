@@ -55,7 +55,9 @@ In the round robin scheduling, processes are dispatched in a FIFO manner but are
 Round Robin Scheduling is preemptive (at the end of time-slice) therefore it is effective in time-sharing environments in which the system needs to guarantee reasonable response times for interactive users. The only interesting issue with round robin scheme is the length of the quantum. Setting the quantum too short causes too many context switches and lowers the CPU efficiency. On the other hand, setting the quantum too long may cause poor response time and approximates FCFS.In any event, the average waiting time under round robin scheduling is often quite long.
 
 ###9.Explain the difference between a monolithic kernel and a microkernel?
-**Monolithic kernel** is a single large process running entirely in a single address space. It is a single static binary file. All kernel services exist and execute in the kernel address space. The kernel can invoke functions directly **In microkernels** the kernel is broken down into separate processes, known as servers. Some of the servers run in kernel space and some run in user-space. All servers are kept separate and run in different address spaces. Servers invoke "services" from each other by sending messages via IPC (Inter process Communication). This separation has the advantage that if one server fails, other servers can still work efficiently.
+**Monolithic kernel** is a single large process running entirely in a single address space. It is a single static binary file. All kernel services exist and execute in the kernel address space. The kernel can invoke functions directly.
+
+**In microkernels** the kernel is broken down into separate processes, known as servers. Some of the servers run in kernel space and some run in user-space. All servers are kept separate and run in different address spaces. Servers invoke "services" from each other by sending messages via IPC (Inter process Communication). This separation has the advantage that if one server fails, other servers can still work efficiently.
 
 ###10.What is multithreading?
 
