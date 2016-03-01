@@ -1,9 +1,13 @@
 """
+@Authors: 
+1.Yashwanth Reddy  Muddireddy
+2.kiran Reddy Knacharla
+3.Srinivas Kanegave
+
+"This code is to interpret shell through python"
+it takes the shell commands like copy,move,chmod,ls -l ,ls -a and more and implements as like of shell
 @Program Name: Yo-Shell V1 
-@Author: Yashwanth Muddireddy
 @Description:
-    This code is a barebones snippet to get your shell up and running. It provides the following classes 
-    (each of which is not fully implemented):
           historyManager - manages a history of commands
           parserManager - handles parsing of commands into command , arguments, flags
           commandManager - gets commands parsed and then runs appropriate functions for command
@@ -127,7 +131,19 @@ class commandManager(parserManager):
         # print path to all filenames.
         for filename in filenames:
             print(os.path.join(dirname, filename))
+    
+    def printl(self):
+        a=['File Name','Size','Permissions','Accessed','Modified','Changed']
+        print('  {0:48s}      {1:8s}  {2:10s}           {3:20s}          {4:10s}                {5:10s} '.format(a[0],a[1],a[2],a[3],a[4],a[5]))
+        print(' {0:48s}      {1:8s}  {2:10s}       {3:24s}   {4:24s}    {5:24s}'.format("-------------------------","---------","-------------","----------------","-------------------","-------------------","-------------------"))
 
+    """
+    @Name: ls all 
+    @Description: directory listing associated with flags
+    @params:flag(-l,-a,-m,-s) and dir(string) the directory to be listed
+    @returns: none
+    
+    """
     #lsall is a method for ls with different flags
     def lsall(self,dir,flag):
         str1 = []
@@ -154,48 +170,52 @@ class commandManager(parserManager):
                 str5.append(time.ctime(os.path.getatime(filename)))
 		str6.append(time.ctime(os.path.getctime(filename)))
 
-	if flag =='-a':
-	   for i in range(len(str5)):
+	 if flag =='-a':
+           for i in range(len(str5)):
                str8.append(str5[i].split())
                str7.append(str8[i])
-	   str7.sort(key = lambda row: (row[0],row[1],row[2],row[3],row[4]))
-	   str7.reverse()
+           str7.sort(key = lambda row: (row[0],row[1],row[2],row[3],row[4]))
+           str7.reverse()
+           self.printl()
            for i in range(len(str5)):
-	       for j in range(len(str5)):
-		   if str(str7[i])==str(str8[j]):
-		      print(str1[j],str2[j],str3[j],str4[j],str5[j],str6[j])
+               for j in range(len(str5)):
+                   if str(str7[i])==str(str8[j]):
+                      print('{0:48s}    {1:8d}        {2:10s}    {3:20s}    {4:10s}    {5:10s}'.format(str1[j],str2[j],str3[j],str4[j],str5[j],str6[j]))
     	elif flag=='-c':
-	     for i in range(len(str6)):
+             for i in range(len(str6)):
                  str10.append(str6[i].split())
                  str9.append(str10[i])
-	     str9.sort(key = lambda row: (row[0],row[1],row[2],row[3],row[4]))
+             str9.sort(key = lambda row: (row[0],row[1],row[2],row[3],row[4]))
+             self.printl()
              str9.reverse()
-	     for i in range(len(str6)):
+             for i in range(len(str6)):
                  for j in range(len(str6)):
                      if str(str9[i])==str(str10[j]):
-                        print(str1[j],str2[j],str3[j],str4[j],str5[j],str6[j])
-        elif flag=='-l':
-	     for j in range(len(str1)):
-	         print(str1[j],str2[j],str3[j],str4[j],str5[j],str6[j])
-
+                        print('{0:48s}    {1:8d}        {2:10s}    {3:20s}    {4:10s}    {5:10s}'.format(str1[j],str2[j],str3[j],str4[j],str5[j],str6[j]))
+         elif flag=='-l':
+             self.printl()
+             for j in range(len(str1)):
+                 print('{0:48s}    {1:8d}        {2:10s}    {3:20s}    {4:10s}    {5:10s}'.format(str1[j],str2[j],str3[j],str4[j],str5[j],str6[j]))
         elif flag=='-s':
              for i in range(len(str2)):
-	         str13.append(str2[i])
-	     str13.sort()
-	     for i in range(len(str2)):
+                 str13.append(str2[i])
+             str13.sort()
+             self.printl()
+             for i in range(len(str2)):
                  for j in range(len(str2)):
                      if str(str13[i])==str(str2[j]):
-                        print(str1[j],str2[j],str3[j],str4[j],str5[j],str6[j])
+                        print('{0:48s}    {1:8d}        {2:10s}    {3:20s}    {4:10s}    {5:10s}'.format(str1[j],str2[j],str3[j],str4[j],str5[j],str6[j]))
         elif flag=='-m':
              for i in range(len(str4)):
                  str12.append(str4[i].split())
                  str11.append(str12[i])
              str11.sort(key = lambda row: (row[0],row[1],row[2],row[3],row[4]))
              str11.reverse()
+             self.printl()
              for i in range(len(str4)):
                  for j in range(len(str4)):
                      if str(str11[i])==str(str12[j]):
-                        print(str1[j],str2[j],str3[j],str4[j],str5[j],str6[j])
+                        print('{0:48s}    {1:8d}        {2:10s}    {3:20s}    {4:10s}    {5:10s}'.format(str1[j],str2[j],str3[j],str4[j],str5[j],str6[j]))
    	else:
 	    print("invaild flag (ls command)")
     """
