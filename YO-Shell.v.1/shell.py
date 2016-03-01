@@ -1,7 +1,7 @@
 """
 @Authors: 
 1.Yashwanth Reddy  Muddireddy
-2.kiran Reddy Knacharla
+2.kiran Reddy Kancharla
 3.Srinivas Kanegave
 
 "This code is to interpret shell through python"
