@@ -28,15 +28,15 @@ After applying lock on shared variable it will make sure that any thread has to 
 
 ##3.Comment out the join statements at the bottom of the program and describe what happens.
 
-Join() operation makes sure that child threads need to finish than parent thread.
+Join() operation makes sure that child threads need to finish bfore parent thread terminates.In our case when we remove join() main method finish first then threadA and threadB terminates.
 
 ##4.What happens if you try to Ctrl-C out of the program before it terminates?
 
-Main thread finish its execution first and then if we interrupt the execution process(Cntl+C) of child threads, compiler ignores by printing the values of variables at that time and continues till finish its job. 
+When we try to terminate the process it won't do untill child threads finish their work.It will print a value by making small fraction of gap while executing though. 
 
 ##5.Read and run Threads4.py. This generates a different and more ridiculous race condition. Write concise explanation of what's happening to cause this bizarre behavior using lines from the code and precise explanation.
 
-In Threads4.py we have a variable that is shared between two threads.When  threadA starts execution it will assign the value as 'sharedNumber=1' and checks 'if(sharedNumber!=1)' then print 'A: that was weird'. Now assume threadB access the shared variable and reassign it as 2 and prints its appropriate statements.So every time shared variable is getting reassigned thus makes our more ridiculous race condition.
+When threadA access sharedNumber it will assign it as 1 and prints some statement and when threadB access the same variable it will reassign it as 2 and print some statements.Thus it purely depends on which thread gets executed first and access the shared variable.
 
                                                   
                   sharedNumber = 1                          
@@ -45,6 +45,6 @@ In Threads4.py we have a variable that is shared between two threads.When  threa
 
 ##6.Does uncommenting the lock operations clear up the problem in question 5?
 
-Uncommenting the lock operations has solved race condition problem, because when a thread access sharedNumber it will get lock untill threadA completes all its operations on that variable and release lock.Thus everytime when if(condition) expression evaluates it will come false and nothing is gonna print. At the end main thread finish its work after threads terminates.
+This has solved our problem by locking the variable when some thread is using it.So that no other process can manipulate data.In our case threadA assigns 1 and do nothing, threadB assigns 2 and do nothing.ThreadA and threadB terminates without printing any statements and finally main method terminates.
 
 
